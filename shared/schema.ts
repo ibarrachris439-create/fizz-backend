@@ -1,26 +1,13 @@
-import { pgTable, text, varchar, timestamp, jsonb, index } from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
+import { Router } from "express";
+import { conversations, messages } from "./schema"; // your drizzle tables
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  email: varchar("email"),
-  createdAt: timestamp("created_at").defaultNow()
-});
+export function createSchemaRouter() {
+  const router = Router();
 
-export const personas = pgTable("personas", {
-  id: varchar("id").primaryKey(),
-  userId: varchar("user_id").references(() => users.id),
-  name: text("name"),
-  systemPrompt: text("system_prompt"),
-  createdAt: timestamp("created_at").defaultNow()
-});
+  // Example test route
+  router.get("/test", (_req, res) => {
+    res.json({ status: "schema ok" });
+  });
 
-export const sessions = pgTable(
-  "sessions",
-  {
-    sid: varchar("sid").primaryKey(),
-    sess: jsonb("sess").notNull(),
-    expire: timestamp("expire").notNull()
-  },
-  (table) => [index("IDX_session_expire").on(table.expire)]
-);
+  return router;
+}
