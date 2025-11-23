@@ -1,4 +1,8 @@
-import type { Express } from "express";
+import type { Express } from "express";import ... from "./storage";
+import ... from "./replitAuth";
+import ... from "@shared/schema";
+import ... from "@shared/personas";
+
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
