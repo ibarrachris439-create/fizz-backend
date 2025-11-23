@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { personas } from "./personas"; // your existing data file
+import { personas } from "../shared/personas";
 
 export function createPersonasRouter() {
   const router = Router();
