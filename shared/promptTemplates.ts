@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { promptTemplates } from "./promptTemplates";
+import { promptTemplates } from "../shared/promptTemplates";
 
 export function createPromptTemplatesRouter() {
   const router = Router();
@@ -9,9 +9,9 @@ export function createPromptTemplatesRouter() {
   });
 
   router.get("/:id", (req, res) => {
-    const found = promptTemplates.find(t => t.id === req.params.id);
-    if (!found) return res.status(404).json({ error: "Template not found" });
-    res.json(found);
+    const template = promptTemplates.find(t => t.id === req.params.id);
+    if (!template) return res.status(404).json({ error: "Template not found" });
+    res.json(template);
   });
 
   return router;
