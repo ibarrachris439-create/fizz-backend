@@ -1,12 +1,17 @@
 import { Router } from "express";
-import { conversations, messages } from "./schema"; // your drizzle tables
+import { promptTemplates } from "./promptTemplates";
 
-export function createSchemaRouter() {
+export function createPromptTemplatesRouter() {
   const router = Router();
 
-  // Example test route
-  router.get("/test", (_req, res) => {
-    res.json({ status: "schema ok" });
+  router.get("/", (_req, res) => {
+    res.json(promptTemplates);
+  });
+
+  router.get("/:id", (req, res) => {
+    const found = promptTemplates.find(t => t.id === req.params.id);
+    if (!found) return res.status(404).json({ error: "Template not found" });
+    res.json(found);
   });
 
   return router;
