@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { conversations, messages } from "./schema"; // your drizzle tables
+import * as schema from "../shared/schema";
 
 export function createSchemaRouter() {
   const router = Router();
 
-  // Example test route
-  router.get("/test", (_req, res) => {
-    res.json({ status: "schema ok" });
+  router.get("/", (_req, res) => {
+    res.json(schema);
   });
 
   return router;
